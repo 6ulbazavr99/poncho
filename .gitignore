@@ -447,3 +447,14 @@ pyvenv.cfg
 pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,django,pycharm,macos,venv,database,git
+
+#---#
+.idea
+media
+static
+venv
+.env
+**/migrations/*
+!**/migrations/__init__.py
+__pycache__/
+.vscode
