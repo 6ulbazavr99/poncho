@@ -92,7 +92,3 @@ Table Feedback {
   created_at datetime
   updated_at datetime
 }
-
-
-https://dbdiagram.io/d/poncho-65a6fdd4ac844320ae1037eb
-https://github.com/bulka174/poncho
