@@ -9,6 +9,7 @@ Table Account {
   avatar img
   created_at datetime
   updated_at datetime
+  phone phone
 }
 
 Table Vendor {
@@ -31,7 +32,6 @@ Table Category {
   id int
   name varchar
   preview img
-  restrictions choice [default: 'None']
 }
 
 Table Product {
@@ -53,7 +53,7 @@ Table Image {
   id int
   name varchar
   image img
-  object id [ref: > Vendor.id, 
+  object id [ref: > Vendor.id,
   ref: > Product.id,
   ref: > Feedback.id]
 }
@@ -92,6 +92,7 @@ Table Feedback {
   created_at datetime
   updated_at datetime
 }
+
 
 https://dbdiagram.io/d/poncho-65a6fdd4ac844320ae1037eb
 https://github.com/bulka174/poncho

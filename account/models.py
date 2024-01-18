@@ -11,7 +11,8 @@ class CustomUser(AbstractUser):
     first_name = models.CharField(_('Имя'), max_length=255, null=True, blank=True)
     last_name = models.CharField(_('Фамилия'), max_length=255, null=True, blank=True)
     birthdate = models.DateField(_('Дата рождения'), null=True, blank=True)
-    avatar = models.ImageField(_('Аватар'), upload_to='avatars', blank=True, default='avatars/default_avatar.jpg')
+    # avatar = models.ImageField(_('Аватар'), upload_to='avatars', blank=True, default='avatars/default_avatar.jpg')
+    avatar = models.ImageField(_('Аватар'), upload_to='avatars', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
