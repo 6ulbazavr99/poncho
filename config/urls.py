@@ -17,12 +17,13 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from .drf_swagger import urlpatterns as doc_urls
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/account/', include('account.urls')),
 ]
 
 urlpatterns += doc_urls  # swagger docs urls
