@@ -1,0 +1,94 @@
+Table Account {
+  app account
+  id int
+  username varchar
+  email email
+  first_name varchar
+  last_name varchar
+  birthdate date
+  avatar img
+  created_at datetime
+  updated_at datetime
+}
+
+Table Vendor {
+  app account
+  id int
+  name varchar
+  description text
+  specifications richtext
+  avatar img
+  members id [ref: <> Account.id]
+  head id [note: 'self.members.id']
+  products id [ref: < Product.id]
+  created_at datetime
+  updated_at datetime
+  categories id [note: 'self.products.category.id']
+}
+
+Table Category {
+  app product
+  id int
+  name varchar
+  preview img
+  restrictions choice [default: 'None']
+}
+
+Table Product {
+  app product
+  id int
+  category id [ref: > Category.id]
+  title varchar
+  price int
+  discount int
+  owner id [ref: > Vendor.id]
+  description text
+  specifications richtext
+  preview img
+  status choice
+}
+
+Table Image {
+  app feedback
+  id int
+  name varchar
+  image img
+  object id [ref: > Vendor.id, 
+  ref: > Product.id,
+  ref: > Feedback.id]
+}
+
+Table Order {
+  app order
+  id int
+  number varchar
+  items id [ref: <> OrderItem.id]
+  amount int [note: 'self.items.price']
+  address geo
+  status choice
+  expectation datetime
+  owner id [ref: > Account.id]
+  created_at datetime
+  updated_at datetime
+}
+
+Table OrderItem {
+  app order
+  id int
+  product id [ref: - Product.id]
+  count int
+}
+
+Table Feedback {
+  app feedback
+  id int
+  rating choice
+  body text
+  preview img
+  object id [ref: <> Vendor.id,
+  ref: <> Product.id]
+  owner id [ref: > Account.id,
+  ref: > Vendor.id]
+  created_at datetime
+  updated_at datetime
+}

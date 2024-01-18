@@ -459,4 +459,4 @@ venv
 __pycache__/
 .vscode
 
-.db_architecture
+#.db_architecture
