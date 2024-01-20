@@ -46,3 +46,17 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
+
+# class VendorSerializer(serializers.ModelSerializer):
+#     head = serializers.PrimaryKeyRelatedField(queryset=CustomUser)
+#
+#     class Meta:
+#         model = Vendor
+#         fields = '__all__'
+#
+#     def validate_head(self, value):
+#         vendor_members = self.instance.members.all() if self.instance else CustomUser.objects.none()
+#         if value not in vendor_members:
+#             raise serializers.ValidationError(f"Выбранный пользователь не входит в {self.name}.")
+#         return value

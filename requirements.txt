@@ -6,3 +6,5 @@ djangorestframework-simplejwt
 drf-yasg
 python-decouple
 django-filter
+
+django-ckeditor
