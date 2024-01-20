@@ -1,5 +1,7 @@
 # poncho
 
+swagger: http://127.0.0.1:8000/docs/
+
 dbdiagram: https://dbdiagram.io/d/poncho-65a6fdd4ac844320ae1037eb
 
 github: https://github.com/bulka174/poncho
