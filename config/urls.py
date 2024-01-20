@@ -18,20 +18,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
-
-from product.views import CategoryViewSet
 from .drf_swagger import urlpatterns as doc_urls
-
-
-router = routers.DefaultRouter()
-router.register(r'categories', CategoryViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('api/v1/account/', include('account.urls')),
-    path('api/v1/', include(router.urls)),
+
+    path('api/v1/product/', include('product.urls')),
+
 ]
 
 urlpatterns += doc_urls  # swagger docs urls
