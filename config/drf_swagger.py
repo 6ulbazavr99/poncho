@@ -20,6 +20,10 @@ category: model, serializers, views, admin, urls +
 category: slug, mptt ?
 
 
+config:
+settings: fix jwt
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
       """,
       terms_of_service="https://www.google.com/policies/terms/",
