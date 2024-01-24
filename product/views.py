@@ -1,11 +1,12 @@
 from rest_framework import status
-from rest_framework.permissions import IsAdminUser, AllowAny
+from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from account.models import Vendor
 from product import serializers
 from product.models import Category, Product
+from product.permissions import IsOwnerOrHead
 
 
 class CategoryViewSet(ModelViewSet):
@@ -23,10 +24,14 @@ class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = serializers.ProductSerializer
 
+    def get_permissions(self):
+        if self.action in ('update', 'partial_update'):
+            return [IsOwnerOrHead()]
+        return [IsAuthenticated()]
+
     def create(self, request, *args, **kwargs):
         vendor_id = request.data.get('vendor')
         user = request.user
-
 
         try:
             vendor = Vendor.objects.get(id=vendor_id)
