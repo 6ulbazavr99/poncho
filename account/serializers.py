@@ -3,6 +3,8 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 from account.models import Vendor
+from product.models import Product
+from product.serializers import ProductSerializer
 
 User = get_user_model()
 
@@ -14,15 +16,34 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    products = serializers.SerializerMethodField()
+    vendors = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'avatar', 'birthdate')
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'avatar', 'birthdate', 'products', 'vendors')
+
+    def get_products(self, obj):
+        user_id = self.context['request'].user.id
+        products = Product.objects.filter(owner=user_id)
+        serialized_data = ProductSerializer(products, many=True).data
+        products_info = [{'id': product_data.get('id'), 'title': product_data.get('title')} for product_data in
+                         serialized_data]
+        return products_info
+
+    def get_vendors(self, obj):
+        user_id = self.context['request'].user.id
+        vendors = Vendor.objects.filter(members=user_id)
+        serialized_data = VendorSerializer(vendors, many=True).data
+        vendors_info = [{'id': vendor_data.get('id'), 'name': vendor_data.get('name')} for vendor_data in
+                        serialized_data]
+        return vendors_info
 
 
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'is_active', 'is_staff', 'is_superuser')
+        fields = ('id', 'username', 'is_active', 'is_superuser')
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -61,3 +82,9 @@ class VendorListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vendor
         fields = ('id', 'name', 'avatar', 'description', )
+
+
+# class VendorProfileSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Vendor
+#         fields = '__all__'

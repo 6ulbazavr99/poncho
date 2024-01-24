@@ -27,8 +27,6 @@ class ProductViewSet(ModelViewSet):
     def get_permissions(self):
         if self.action in ('update', 'partial_update'):
             return [IsOwner()]
-        elif self.action == 'retrieve':
-            return [IsMembership()]
         elif self.action == 'create':
             return [IsAuthenticated()]
         elif self.action == 'destroy':

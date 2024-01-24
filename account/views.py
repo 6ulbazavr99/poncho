@@ -25,7 +25,7 @@ class UserViewSet(viewsets.ModelViewSet):
             return RegisterSerializer
         elif self.action == 'list':
             return UserListSerializer
-        elif self.action in ('update', 'partial_update'):
+        elif self.action in ('update', 'partial_update', 'retrieve'):
             return UserProfileSerializer
         return UserSerializer
 
