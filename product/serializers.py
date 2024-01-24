@@ -10,6 +10,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    # owner = serializers.ReadOnlyField(source='self.request.user')
+
     class Meta:
         model = Product
         fields = '__all__'

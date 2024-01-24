@@ -1,10 +1,11 @@
 from ckeditor.fields import RichTextField
+from django.contrib.auth import get_user_model
 from django.db import models
 
 from account.models import Vendor
 
 
-# Create your models here.
+User = get_user_model()
 
 
 class Category(models.Model):
@@ -32,6 +33,7 @@ class Product(models.Model):
     discount = models.PositiveSmallIntegerField(default=0)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='in_stock')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, related_name='products')
-    # owner = models.ForeignKey()
+    owner = models.ForeignKey(User, related_name='products', on_delete=models.CASCADE, blank=True, null=True)
     vendor = models.ForeignKey(Vendor, related_name='products', null=True, on_delete=models.SET_NULL)
 
+    # head = models.ForeignKey(CustomUser, related_name='vendors_head', blank=True, null=True, on_delete=models.SET_NULL)
