@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from account.models import Vendor
-from account.permissions import IsAuthenticatedUser, IsAuthenticatedUserOrAdmin, IsHead, IsHeadOrAdmin
+from account.permissions import IsAccountOwner, IsAccountOwnerOrAdmin, IsHead, IsHeadOrAdmin
 from account.serializers import RegisterSerializer, UserSerializer, UserListSerializer, UserProfileSerializer, \
     VendorSerializer, VendorListSerializer
 
@@ -15,9 +15,9 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action in ('update', 'partial_update'):
-            return [IsAuthenticatedUser()]
+            return [IsAccountOwner()]
         elif self.action in ('retrieve', 'destroy'):
-            return [IsAuthenticatedUserOrAdmin()]
+            return [IsAccountOwnerOrAdmin()]
         return [AllowAny()]
 
     def get_serializer_class(self):

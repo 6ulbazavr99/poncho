@@ -15,6 +15,9 @@ Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwI
 
 andrey:
 Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA2MTQxODMxLCJpYXQiOjE3MDYwODE4OTEsImp0aSI6IjA4NmY0NWYxNDdkZjQ3N2M4Njc0OWI3ZjIyZDU2NDlkIiwidXNlcl9pZCI6Mn0.0mkArRn8NlUbNVBm5sbBbijRJuCBjmhVDp2aB6JVHTc
+
+sanya:
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA2MTU1Nzc4LCJpYXQiOjE3MDYwOTU4MzgsImp0aSI6IjQxMzhmNTNhNTZiYzQ3OWI5YWI2NGU1NDNjODJjNWQ1IiwidXNlcl9pZCI6M30.HrLOBJeeb_FX_wYzBbj0MdTTSeenqLjYDzWC6po9gok
             
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 account:
