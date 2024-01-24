@@ -1,5 +1,9 @@
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 from django.utils.translation import gettext_lazy as _
 
@@ -17,14 +21,18 @@ class CustomUser(AbstractUser):
         return f'{self.username}'
 
 
-# class Vendor(models.Model):
-#     name = models.CharField(_('Имя'), max_length=255)
-#     description = models.TextField(_('Описание'), null=True, blank=True)
-#     avatar = models.ImageField(_('Аватар'), upload_to='avatars', blank=True, null=True)
-#     specifications = RichTextField(blank=True, null=True)
-#     members = models.ManyToManyField(CustomUser, related_name='vendors')
-#     products = models.ForeignKey(Product, related_name='vendors', on_delete=models.CASCADE, blank=True, null=True)
-#     # head = models.ForeignKey(members, related_name='vendors', on_delete=models.CASCADE, null=True, blank=True)
-#     # categories = models.ManyToManyField(Category, related_name='')
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
+class Vendor(models.Model):
+    name = models.CharField(_('Имя'), max_length=255, unique=True)
+    description = models.TextField(_('Описание'), null=True, blank=True)
+    avatar = models.ImageField(_('Аватар'), upload_to='avatars', blank=True, null=True)
+    specifications = RichTextField(blank=True, null=True)
+    members = models.ManyToManyField(CustomUser, related_name='vendors_members', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    head = models.ForeignKey(CustomUser, related_name='vendors_head', blank=True, null=True, on_delete=models.SET_NULL)
+
+    # products = models.ForeignKey(Product, related_name='vendors', on_delete=models.CASCADE, blank=True, null=True)
+    # categories = models.ManyToManyField(Category, related_name='')
+
+    def __str__(self):
+        return self.name

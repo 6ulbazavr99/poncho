@@ -18,7 +18,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+
+from account.views import VendorViewSet
 from .drf_swagger import urlpatterns as doc_urls
+
+
+router = routers.DefaultRouter()
+router.register(r'api/v1/vendor', VendorViewSet)
 
 
 urlpatterns = [
@@ -29,6 +36,8 @@ urlpatterns = [
     path('api/v1/product/', include('product.urls')),
 
 ]
+
+urlpatterns += router.urls  # vendor
 
 urlpatterns += doc_urls  # swagger docs urls
 

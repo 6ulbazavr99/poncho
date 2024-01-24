@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
+from account.models import Vendor
 
 User = get_user_model()
 
@@ -48,15 +49,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-# class VendorSerializer(serializers.ModelSerializer):
-#     head = serializers.PrimaryKeyRelatedField(queryset=CustomUser)
-#
-#     class Meta:
-#         model = Vendor
-#         fields = '__all__'
-#
-#     def validate_head(self, value):
-#         vendor_members = self.instance.members.all() if self.instance else CustomUser.objects.none()
-#         if value not in vendor_members:
-#             raise serializers.ValidationError(f"Выбранный пользователь не входит в {self.name}.")
-#         return value
+class VendorSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Vendor
+        fields = '__all__'

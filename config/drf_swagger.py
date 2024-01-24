@@ -13,6 +13,7 @@ schema_view = get_schema_view(
 account:
 customuser: permissions, model, serializers, views, admin, urls +
 customuser: phone, celery ?
+vendor: start +
 
 
 product:
@@ -21,10 +22,22 @@ category: slug, mptt ?
 
 
 config:
-settings: fix jwt
+settings: fix jwt +
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Reg. temple:
+
+{
+  "username": "andrey",
+  "email": "andrey@andrey.com",
+  "password": "bastard123",
+  "password2": "bastard123",
+  "first_name": "andrey",
+  "last_name": "test",
+  "birthdate": "2000-01-23"
+}
       """,
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@snippets.local"),

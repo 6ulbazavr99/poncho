@@ -1,10 +1,11 @@
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
+from account.models import Vendor
 from account.permissions import IsAuthenticatedUser, IsAuthenticatedUserOrAdmin
-from account.serializers import RegisterSerializer, UserSerializer, UserListSerializer, UserProfileSerializer
-
+from account.serializers import RegisterSerializer, UserSerializer, UserListSerializer, UserProfileSerializer, \
+    VendorSerializer
 
 User = get_user_model()
 
@@ -29,6 +30,12 @@ class UserViewSet(viewsets.ModelViewSet):
         return UserSerializer
 
 
-# class VendorViewSet(viewsets.ModelViewSet):
-#     queryset = Vendor.objects.all()
-#     serializer_class = VendorSerializer
+class VendorViewSet(viewsets.ModelViewSet):
+    queryset = Vendor.objects.all()
+    serializer_class = VendorSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(head=self.request.user)
+        vendor_instance = serializer.instance
+        vendor_instance.members.add(self.request.user)
