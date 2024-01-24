@@ -9,6 +9,13 @@ schema_view = get_schema_view(
       title="Poncho API",
       default_version='v1',   # TODO:
       description="""
+
+admin:
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA2MTQwOTk3LCJpYXQiOjE3MDYwODEwNTcsImp0aSI6IjE0Y2ZkOWI0YmM1NTRiNGJiOTAzZmNhMzBhYWMyMzY4IiwidXNlcl9pZCI6MX0.9zl8fhPRju8WCM0GgzOa4TvnJDCt5nC9_2mYVWrphkg
+
+andrey:
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA2MTQxODMxLCJpYXQiOjE3MDYwODE4OTEsImp0aSI6IjA4NmY0NWYxNDdkZjQ3N2M4Njc0OWI3ZjIyZDU2NDlkIiwidXNlcl9pZCI6Mn0.0mkArRn8NlUbNVBm5sbBbijRJuCBjmhVDp2aB6JVHTc
+            
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 account:
 customuser: permissions, model, serializers, views, admin, urls +
@@ -19,6 +26,7 @@ vendor: start +
 product:
 category: model, serializers, views, admin, urls +
 category: slug, mptt ?
+category: fix unique preview
 
 
 config:

@@ -9,7 +9,8 @@ Table Account {
   avatar img
   created_at datetime
   updated_at datetime
-  phone phone
+
+  // phone phone
 }
 
 Table Vendor {
@@ -21,10 +22,14 @@ Table Vendor {
   avatar img
   members id [ref: <> Account.id]
   head id [note: 'self.members.id']
-  products id [ref: < Product.id]
   created_at datetime
   updated_at datetime
-  categories id [note: 'self.products.category.id']
+
+  // products id [ref: < Product.id]
+  // categories id [note: 'self.products.category.id']
+  // phone phone
+  // email email
+  // address geo
 }
 
 Table Category {
@@ -46,6 +51,11 @@ Table Product {
   specifications richtext
   preview img
   status choice
+  created_at datetime
+  updated_at datetime
+
+
+  // address geo
 }
 
 Table Image {
