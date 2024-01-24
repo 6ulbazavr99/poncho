@@ -40,21 +40,8 @@ class ProductViewSet(ModelViewSet):
 
         if user in vendor.members.all():
             serializer = self.get_serializer(data=request.data)
-            # serializer.save(owner=self.request.user)
             serializer.is_valid(raise_exception=True)
-            serializer.save(owner=self.request.user)
+            serializer.save(owner=user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response({"Ошибка": "Пользователь не является членом указанного поставщика"}, status=status.HTTP_403_FORBIDDEN)
-
-    # def perform_create(self, serializer):
-    #     serializer.save(owner=self.request.user)
-    #######
-
-    # def perform_create(self, serializer):
-    # #     vendors_memberships = self.request.user.vendors_members.all()
-    # #     print(vendors_memberships)
-    # #     print(self.request.user.vendors_members, '!#!@#@!#@!EASKDKSKFASFKASKF')
-    #     serializer.save(owner=self.request.user)
-        # vendor_instance = serializer.instance
-        # vendor_instance.members.add(self.request.user)
