@@ -6,7 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 from account.models import Vendor
 from product import serializers
 from product.models import Category, Product
-from product.permissions import IsOwnerOrHead
+from product.permissions import IsOwnerOrHead, IsOwner, IsMembership
 
 
 class CategoryViewSet(ModelViewSet):
@@ -26,8 +26,14 @@ class ProductViewSet(ModelViewSet):
 
     def get_permissions(self):
         if self.action in ('update', 'partial_update'):
+            return [IsOwner()]
+        elif self.action == 'retrieve':
+            return [IsMembership()]
+        elif self.action == 'create':
+            return [IsAuthenticated()]
+        elif self.action == 'destroy':
             return [IsOwnerOrHead()]
-        return [IsAuthenticated()]
+        return [AllowAny()]
 
     def create(self, request, *args, **kwargs):
         vendor_id = request.data.get('vendor')

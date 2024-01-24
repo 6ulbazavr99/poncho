@@ -11,3 +11,8 @@ class IsOwnerOrHead(permissions.BasePermission):
 class IsOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return obj in request.user.products.all()
+
+
+class IsMembership(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return request.user in obj.vendor.members.all()
