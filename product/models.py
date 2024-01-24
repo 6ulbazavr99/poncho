@@ -1,6 +1,8 @@
 from ckeditor.fields import RichTextField
 from django.db import models
 
+from account.models import Vendor
+
 
 # Create your models here.
 
@@ -31,3 +33,5 @@ class Product(models.Model):
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='in_stock')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, related_name='products')
     # owner = models.ForeignKey()
+    vendor = models.ForeignKey(Vendor, related_name='products', null=True, on_delete=models.SET_NULL)
+

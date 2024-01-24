@@ -27,6 +27,7 @@ product:
 category: model, serializers, views, admin, urls +
 category: slug, mptt ?
 category: fix unique preview
+product: start+
 
 
 config:
