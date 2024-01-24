@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from account.models import Vendor
 from account.permissions import IsAccountOwner, IsAccountOwnerOrAdmin, IsHead, IsHeadOrAdmin
 from account.serializers import RegisterSerializer, UserSerializer, UserListSerializer, UserProfileSerializer, \
-    VendorSerializer, VendorListSerializer
+    VendorSerializer, VendorListSerializer, VendorProfileSerializer
 
 User = get_user_model()
 
@@ -46,6 +46,8 @@ class VendorViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'list':
             return VendorListSerializer
+        if self.action == 'retrieve':
+            return VendorProfileSerializer
         return VendorSerializer
 
     def perform_create(self, serializer):

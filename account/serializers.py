@@ -84,7 +84,17 @@ class VendorListSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'avatar', 'description', )
 
 
-# class VendorProfileSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Vendor
-#         fields = '__all__'
+class VendorProfileSerializer(serializers.ModelSerializer):
+    products = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Vendor
+        fields = '__all__'
+
+    def get_products(self, obj):
+        # user_id = self.context['request'].user.id
+        products = Product.objects.filter(vendor=obj)
+        serialized_data = ProductSerializer(products, many=True).data
+        products_info = [{'id': product_data.get('id'), 'title': product_data.get('title')} for product_data in
+                         serialized_data]
+        return products_info
