@@ -54,3 +54,10 @@ class VendorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vendor
         fields = '__all__'
+
+
+class VendorListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Vendor
+        fields = ('id', 'name', 'avatar', 'description', )

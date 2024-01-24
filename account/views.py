@@ -3,9 +3,9 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from account.models import Vendor
-from account.permissions import IsAuthenticatedUser, IsAuthenticatedUserOrAdmin
+from account.permissions import IsAuthenticatedUser, IsAuthenticatedUserOrAdmin, IsHead, IsHeadOrAdmin
 from account.serializers import RegisterSerializer, UserSerializer, UserListSerializer, UserProfileSerializer, \
-    VendorSerializer
+    VendorSerializer, VendorListSerializer
 
 User = get_user_model()
 
@@ -33,7 +33,20 @@ class UserViewSet(viewsets.ModelViewSet):
 class VendorViewSet(viewsets.ModelViewSet):
     queryset = Vendor.objects.all()
     serializer_class = VendorSerializer
-    permission_classes = [IsAuthenticated]
+
+    def get_permissions(self):
+        if self.action in ('update', 'partial_update'):
+            return [IsHead()]
+        elif self.action in ('retrieve', 'destroy'):
+            return [IsHeadOrAdmin()]
+        elif self.action == 'list':
+            return [AllowAny()]
+        return [IsAuthenticated()]
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return VendorListSerializer
+        return VendorSerializer
 
     def perform_create(self, serializer):
         serializer.save(head=self.request.user)
