@@ -37,9 +37,11 @@ class VendorViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ('update', 'partial_update'):
             return [IsHead()]
-        elif self.action in ('retrieve', 'destroy'):
+        # elif self.action in ('retrieve', 'destroy'):
+        #     return [IsHeadOrAdmin()]
+        elif self.action == 'destroy':
             return [IsHeadOrAdmin()]
-        elif self.action == 'list':
+        elif self.action in ('retrieve', 'list'):
             return [AllowAny()]
         return [IsAuthenticated()]
 

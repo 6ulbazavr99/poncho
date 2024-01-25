@@ -5,6 +5,8 @@ from django.db import models
 
 from django.utils.translation import gettext_lazy as _
 
+# from product.models import Category
+
 
 class CustomUser(AbstractUser):
     email = models.EmailField(_('Электронная почта'), unique=True)
@@ -30,9 +32,7 @@ class Vendor(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     head = models.ForeignKey(CustomUser, related_name='vendors_head', blank=True, null=True, on_delete=models.SET_NULL)
-
-    # products = models.ForeignKey(Product, related_name='vendors', on_delete=models.CASCADE, blank=True, null=True)
-    # categories = models.ManyToManyField(Category, related_name='')
+    # categories = models.ManyToManyField(Category, related_name='vendors', blank=True)
 
     def __str__(self):
         return self.name

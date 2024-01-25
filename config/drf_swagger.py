@@ -11,16 +11,16 @@ schema_view = get_schema_view(
       description="""
 
 admin:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA2MTQwOTk3LCJpYXQiOjE3MDYwODEwNTcsImp0aSI6IjE0Y2ZkOWI0YmM1NTRiNGJiOTAzZmNhMzBhYWMyMzY4IiwidXNlcl9pZCI6MX0.9zl8fhPRju8WCM0GgzOa4TvnJDCt5nC9_2mYVWrphkg
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwMzYzMzgyLCJpYXQiOjE3MDYxNjgxODIsImp0aSI6IjI3ZTVkYzQ5Y2NlZDRlZjFiMTVkYjJlY2NlNWE5MjIxIiwidXNlcl9pZCI6MX0.kNm7rh_n9TE_00hwUksicem-nVvX0XgUVdCi2jXiWxQ
 
 andrey:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA2MTQxODMxLCJpYXQiOjE3MDYwODE4OTEsImp0aSI6IjA4NmY0NWYxNDdkZjQ3N2M4Njc0OWI3ZjIyZDU2NDlkIiwidXNlcl9pZCI6Mn0.0mkArRn8NlUbNVBm5sbBbijRJuCBjmhVDp2aB6JVHTc
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwMzYzMTAwLCJpYXQiOjE3MDYxNjc5MDAsImp0aSI6ImI3ZDQzZGFlNjhmZjQ0ZjFiZmJhYjYyZWNhZGNjZDBiIiwidXNlcl9pZCI6Mn0.GLy4e1iiEHTRmG0boyn2sCX0NKX4Ta-f6JU7R2L6gNs
 
 sanya:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA2MTU1Nzc4LCJpYXQiOjE3MDYwOTU4MzgsImp0aSI6IjQxMzhmNTNhNTZiYzQ3OWI5YWI2NGU1NDNjODJjNWQ1IiwidXNlcl9pZCI6M30.HrLOBJeeb_FX_wYzBbj0MdTTSeenqLjYDzWC6po9gok
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwMzYzMTk0LCJpYXQiOjE3MDYxNjc5OTQsImp0aSI6ImNiZWYyODdjYTVmOTRhNDJhZTEzMTRkNWJkZjcwNTk5IiwidXNlcl9pZCI6M30.XXsoUKw6BqSeW0FR_-nNjuC4wkYYtq816O1CbXxa4V0
 
 oleg:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA2MTU2NzIyLCJpYXQiOjE3MDYwOTY3ODIsImp0aSI6IjM5NjgxOGY3ZjAzNTRkYjZiZDNlNzkzMzcwYWRmN2RiIiwidXNlcl9pZCI6NH0.D06LujV57BOvyyEmso5AeeKvi0LgK_q3II8ghLZJRbQ
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwMzYzMjEyLCJpYXQiOjE3MDYxNjgwMTIsImp0aSI6ImNmYzMzNGJhMWM0MDRkODc4NDRiOTM0NGI4MjZkZjcwIiwidXNlcl9pZCI6NH0.XBGTYQwMPA8xJ_gZkqL6_SM4o4AAQ6Xdfw6gEMHf1PQ
             
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 account:
@@ -46,13 +46,11 @@ Reg. temple:
 
 {
   "username": "andrey",
-  "email": "andrey@andrey.com",
-  "password": "bastard123",
-  "password2": "bastard123",
-  "first_name": "andrey",
-  "last_name": "test",
-  "birthdate": "2000-01-23"
+  "email": "user@example.com",
+  "password": "stringst",
+  "password2": "stringst"
 }
+
       """,
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@snippets.local"),

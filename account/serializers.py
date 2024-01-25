@@ -3,8 +3,8 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 from account.models import Vendor
-from product.models import Product
-from product.serializers import ProductSerializer
+from product.models import Product, Category
+from product.serializers import ProductSerializer, CategorySerializer
 
 User = get_user_model()
 
@@ -86,15 +86,39 @@ class VendorListSerializer(serializers.ModelSerializer):
 
 class VendorProfileSerializer(serializers.ModelSerializer):
     products = serializers.SerializerMethodField()
+    categories = serializers.SerializerMethodField()
 
     class Meta:
         model = Vendor
         fields = '__all__'
 
     def get_products(self, obj):
-        # user_id = self.context['request'].user.id
         products = Product.objects.filter(vendor=obj)
         serialized_data = ProductSerializer(products, many=True).data
         products_info = [{'id': product_data.get('id'), 'title': product_data.get('title')} for product_data in
                          serialized_data]
         return products_info
+        # categories = [Category.objects.filter(id=product_data.get('category')) for product_data in products_serialized_data]
+
+    def get_categories(self, obj):
+        products = obj.products.all()
+        # products_serialized_data = ProductSerializer(products, many=True).data
+        categories = [category.category for category in products]
+        categories_serialized_data = CategorySerializer(categories, many=True).data
+        categories_info = [{'id': category_data.get('id'), 'name': category_data.get('name')} for category_data in
+                           categories_serialized_data]
+
+        return categories_info
+        # print(categories)
+
+        # products_categories = [product_data.get('category') for product_data in products_serialized_data]
+
+        # categories = [Category.objects.filter(id=product_data.get('category')) for product_data in products_serialized_data]
+        # print(categories, 'SDADSAD')
+        #
+        # # # print(categories)
+        # categories_serialized_data = CategorySerializer(categories, many=True).data
+        # categories_info = [{'id': category_data.get('id'), 'name': category_data.get('name')} for category_data in
+        #                    categories_serialized_data]
+        # #
+        # print(categories_info, 'asdsad')
