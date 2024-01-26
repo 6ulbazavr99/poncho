@@ -71,20 +71,6 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class VendorSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Vendor
-        fields = '__all__'
-
-
-class VendorListSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Vendor
-        fields = ('id', 'name', 'avatar', 'description', )
-
-
-class VendorProfileSerializer(serializers.ModelSerializer):
     products = serializers.SerializerMethodField()
     categories = serializers.SerializerMethodField()
 
@@ -98,27 +84,25 @@ class VendorProfileSerializer(serializers.ModelSerializer):
         products_info = [{'id': product_data.get('id'), 'title': product_data.get('title')} for product_data in
                          serialized_data]
         return products_info
-        # categories = [Category.objects.filter(id=product_data.get('category')) for product_data in products_serialized_data]
 
     def get_categories(self, obj):
         products = obj.products.all()
-        # products_serialized_data = ProductSerializer(products, many=True).data
         categories = [category.category for category in products]
         categories_serialized_data = CategorySerializer(categories, many=True).data
         categories_info = [{'id': category_data.get('id'), 'name': category_data.get('name')} for category_data in
                            categories_serialized_data]
-
         return categories_info
-        # print(categories)
 
-        # products_categories = [product_data.get('category') for product_data in products_serialized_data]
 
-        # categories = [Category.objects.filter(id=product_data.get('category')) for product_data in products_serialized_data]
-        # print(categories, 'SDADSAD')
-        #
-        # # # print(categories)
-        # categories_serialized_data = CategorySerializer(categories, many=True).data
-        # categories_info = [{'id': category_data.get('id'), 'name': category_data.get('name')} for category_data in
-        #                    categories_serialized_data]
-        # #
-        # print(categories_info, 'asdsad')
+class VendorListSerializer(VendorSerializer):
+
+    class Meta:
+        model = Vendor
+        fields = ('id', 'name', 'avatar', 'description', 'categories', 'products')
+
+
+class VendorProfileSerializer(VendorSerializer):
+
+    class Meta:
+        model = Vendor
+        fields = '__all__'
