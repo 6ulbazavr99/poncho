@@ -18,16 +18,16 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_products(self, obj):
-        user_id = self.context['request'].user.id
-        products = Product.objects.filter(owner=user_id)
+        user = self.context['request'].user
+        products = Product.objects.filter(owner=user)
         serialized_data = ProductSerializer(products, many=True).data
         products_info = [{'id': product_data.get('id'), 'title': product_data.get('title')} for product_data in
                          serialized_data]
         return products_info
 
     def get_vendors(self, obj):
-        user_id = self.context['request'].user.id
-        vendors = Vendor.objects.filter(members=user_id)
+        user = self.context['request'].user
+        vendors = Vendor.objects.filter(members=user)
         serialized_data = VendorSerializer(vendors, many=True).data
         vendors_info = [{'id': vendor_data.get('id'), 'name': vendor_data.get('name')} for vendor_data in
                         serialized_data]
@@ -35,11 +35,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(UserSerializer):
-
     class Meta:
         model = User
-        # fields = ('id', 'username', 'email', 'first_name', 'last_name', 'avatar', 'birthdate', 'products', 'vendors')
-        fields = '__all__'
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'avatar', 'birthdate', 'products', 'vendors')
 
 
 class UserListSerializer(UserSerializer):
@@ -97,14 +95,12 @@ class VendorSerializer(serializers.ModelSerializer):
 
 
 class VendorListSerializer(VendorSerializer):
-
     class Meta:
         model = Vendor
         fields = ('id', 'name', 'avatar', 'description', 'categories', 'products')
 
 
 class VendorProfileSerializer(VendorSerializer):
-
     class Meta:
         model = Vendor
         fields = '__all__'
