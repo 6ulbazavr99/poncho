@@ -6,7 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 from account.models import Vendor
 from product import serializers
 from product.models import Category, Product
-from product.permissions import IsOwnerOrHead, IsOwner, IsMembership
+from product.permissions import IsOwnerOrHead, IsOwner
 
 
 class CategoryViewSet(ModelViewSet):

@@ -35,18 +35,17 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(UserSerializer):
-    products = serializers.SerializerMethodField()
-    vendors = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'avatar', 'birthdate', 'products', 'vendors')
+        # fields = ('id', 'username', 'email', 'first_name', 'last_name', 'avatar', 'birthdate', 'products', 'vendors')
+        fields = '__all__'
 
 
 class UserListSerializer(UserSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'is_active', 'is_superuser')
+        fields = ('id', 'username', 'is_active', 'is_superuser', 'products', 'vendors')
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -90,7 +89,7 @@ class VendorSerializer(serializers.ModelSerializer):
 
     def get_categories(self, obj):
         products = obj.products.all()
-        categories = [category.category for category in products]
+        categories = [product_category.category for product_category in products]
         categories_serialized_data = CategorySerializer(categories, many=True).data
         categories_info = [{'id': category_data.get('id'), 'name': category_data.get('name')} for category_data in
                            categories_serialized_data]
