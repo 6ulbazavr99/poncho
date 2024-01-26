@@ -3,25 +3,19 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 from account.models import Vendor
-from product.models import Product, Category
+from product.models import Product
 from product.serializers import ProductSerializer, CategorySerializer
 
 User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = '__all__'
-
-
-class UserProfileSerializer(serializers.ModelSerializer):
     products = serializers.SerializerMethodField()
     vendors = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'avatar', 'birthdate', 'products', 'vendors')
+        fields = '__all__'
 
     def get_products(self, obj):
         user_id = self.context['request'].user.id
@@ -40,7 +34,16 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return vendors_info
 
 
-class UserListSerializer(serializers.ModelSerializer):
+class UserProfileSerializer(UserSerializer):
+    products = serializers.SerializerMethodField()
+    vendors = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'avatar', 'birthdate', 'products', 'vendors')
+
+
+class UserListSerializer(UserSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'is_active', 'is_superuser')
