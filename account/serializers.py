@@ -6,6 +6,9 @@ from account.models import Vendor
 from product.models import Product
 from product.serializers import ProductSerializer, CategorySerializer
 
+from django.utils.translation import gettext_lazy as _
+
+
 User = get_user_model()
 
 
@@ -43,10 +46,10 @@ class UserProfileSerializer(UserSerializer):
 class UserListSerializer(UserSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'is_active', 'is_superuser', 'products', 'vendors')
+        fields = ('id', 'username', 'avatar', 'vendors')
 
 
-class RegisterSerializer(serializers.ModelSerializer):
+class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(min_length=8, max_length=32,
                                      required=True, write_only=True)
     password2 = serializers.CharField(min_length=8, max_length=32,
@@ -61,7 +64,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         password = attrs['password']
         password2 = attrs.pop('password2')
         if password2 != password:
-            raise serializers.ValidationError('Пароли не совпадают')
+            raise serializers.ValidationError(_('Пароли не совпадают'))
         validate_password(password)
         return attrs
 
@@ -97,10 +100,10 @@ class VendorSerializer(serializers.ModelSerializer):
 class VendorListSerializer(VendorSerializer):
     class Meta:
         model = Vendor
-        fields = ('id', 'name', 'avatar', 'description', 'categories', 'products')
+        fields = ('id', 'name', 'avatar', 'categories')
 
 
 class VendorProfileSerializer(VendorSerializer):
     class Meta:
         model = Vendor
-        fields = '__all__'
+        fields = ('id', 'name', 'avatar', 'description', 'categories', 'products', 'members', 'head', 'specifications')

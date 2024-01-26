@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny
 
 from account.models import Vendor
 from account.permissions import IsAccountOwner, IsAccountOwnerOrAdmin, IsHead, IsHeadOrAdmin
-from account.serializers import RegisterSerializer, UserSerializer, UserListSerializer, UserProfileSerializer, \
-    VendorSerializer, VendorListSerializer, VendorProfileSerializer
+from account.serializers import UserSerializer, UserListSerializer, UserProfileSerializer, \
+    VendorSerializer, VendorListSerializer, VendorProfileSerializer, UserRegisterSerializer
+
 
 User = get_user_model()
 
@@ -16,13 +17,13 @@ class UserViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ('update', 'partial_update'):
             return [IsAccountOwner()]
-        elif self.action in ('retrieve', 'destroy'):
+        elif self.action == 'destroy':
             return [IsAccountOwnerOrAdmin()]
         return [AllowAny()]
 
     def get_serializer_class(self):
         if self.action == 'create':
-            return RegisterSerializer
+            return UserRegisterSerializer
         elif self.action == 'list':
             return UserListSerializer
         elif self.action in ('update', 'partial_update', 'retrieve'):
@@ -37,13 +38,9 @@ class VendorViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ('update', 'partial_update'):
             return [IsHead()]
-        # elif self.action in ('retrieve', 'destroy'):
-        #     return [IsHeadOrAdmin()]
         elif self.action == 'destroy':
             return [IsHeadOrAdmin()]
-        elif self.action in ('retrieve', 'list'):
-            return [AllowAny()]
-        return [IsAuthenticated()]
+        return [AllowAny()]
 
     def get_serializer_class(self):
         if self.action == 'list':

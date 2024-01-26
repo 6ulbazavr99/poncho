@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #inst_apps
+    # inst_apps
     'rest_framework',
     'django_filters',
     'drf_yasg',
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'ckeditor',
 
-    #my_apps
+    # my_apps
     'account',
     'product',
 
@@ -168,8 +168,6 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    # "ACCESS_TOKEN_LIFETIME": None,
-    # "REFRESH_TOKEN_LIFETIME": None,
     "ACCESS_TOKEN_LIFETIME": timedelta(weeks=999),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": True,

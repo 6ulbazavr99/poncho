@@ -25,8 +25,6 @@ Table Vendor {
   created_at datetime
   updated_at datetime
 
-  // products id [ref: < Product.id]
-  // categories id [note: 'self.products.category.id']
   // phone phone
   // email email
   // address geo
@@ -54,7 +52,6 @@ Table Product {
   created_at datetime
   updated_at datetime
 
-
   // address geo
 }
 
@@ -74,12 +71,13 @@ Table Order {
   number varchar
   items id [ref: <> OrderItem.id]
   amount int [note: 'self.items.price']
-  address geo
   status choice
   expectation datetime
   owner id [ref: > Account.id]
   created_at datetime
   updated_at datetime
+
+  // address geo
 }
 
 Table OrderItem {

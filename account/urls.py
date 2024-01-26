@@ -7,9 +7,10 @@ from account.views import UserViewSet
 router = routers.DefaultRouter()
 router.register(r'', UserViewSet)
 
+
 urlpatterns = [
-    path('login/', TokenObtainPairView.as_view()),
-    path('refresh/', TokenRefreshView.as_view()),
+    path('authorization/login/', TokenObtainPairView.as_view()),
+    path('authorization/refresh/', TokenRefreshView.as_view()),
 ]
 
 

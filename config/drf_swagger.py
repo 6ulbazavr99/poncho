@@ -23,23 +23,29 @@ oleg:
 Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwMzYzMjEyLCJpYXQiOjE3MDYxNjgwMTIsImp0aSI6ImNmYzMzNGJhMWM0MDRkODc4NDRiOTM0NGI4MjZkZjcwIiwidXNlcl9pZCI6NH0.XBGTYQwMPA8xJ_gZkqL6_SM4o4AAQ6Xdfw6gEMHf1PQ
             
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-account:
+#
+### account:
 customuser: permissions, model, serializers, views, admin, urls +
 customuser: phone, celery ?
 vendor: start +
-
-
-product:
+vendor: 80% +
+customuser: 80% +
+signals: celery ?
+#
+### product:
 category: model, serializers, views, admin, urls +
 category: slug, mptt ?
 category: fix unique preview
-product: start++
-
-
-config:
+product: start +
+product: 70% +
+product: sers
+#
+### config:
 settings: fix jwt +
-
-
+#
+### general:
+formatting the code +
+#
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 Reg. temple:
