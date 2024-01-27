@@ -24,7 +24,9 @@ Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwI
             
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 #
-### account:
+#
+#
+############### <account:
 customuser: permissions, model, serializers, views, admin, urls +
 customuser: phone, celery ?
 vendor: start +
@@ -36,8 +38,13 @@ user: reg email confirmation +
 user/utils: change host !!!
 user: 80% +
 vendor: 80% +
+user: reset password +
+user: is_active superuser fix +
+############### :account>
 #
-### product:
+#
+#
+############### <product:
 category: model, serializers, views, admin, urls +
 category: slug, mptt ?
 category: fix unique preview -
@@ -48,15 +55,32 @@ category: products list GET ID +
 category: add listing ser +
 category: 80% +
 product: 80% +
+product: vendor require
+############### :product>
 #
-### config:
+#
+#
+############### <order:
+order:
+orderitem:
+############### :order>
+#
+#
+#
+############### <config:
 settings: fix jwt +
 settings: emailback +
+############### :config>
 #
-### general:
+#
+#
+############### <general:
 formatting the code +
 emailback +
-
+db_diagram +
+############### :general>
+#
+#
 #
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 

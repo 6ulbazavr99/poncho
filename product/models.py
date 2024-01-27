@@ -27,7 +27,8 @@ class Product(models.Model):
         ('out_of_stock', _('Нет в наличии'))
     )
 
-    title = models.CharField(max_length=255, unique=True, verbose_name=_('Название'))
+    name = models.CharField(max_length=255, unique=True, verbose_name=_('Название'))
+    name_plural = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Название во множественном числе'))
     description = models.TextField(blank=True, null=True, verbose_name=_('Описание'))
     specifications = RichTextField(blank=True, null=True, verbose_name=_('Характеристики'))
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Цена'))
@@ -42,8 +43,12 @@ class Product(models.Model):
     # address =
 
     def __str__(self):
-        return f'{self.title} [{self.vendor}]'
+        return f'{self.name} [{self.vendor}]'
 
     class Meta:
         verbose_name = _('Продукт')
         verbose_name_plural = _('Продукты')
+
+    def save(self, *args, **kwargs):
+        if not self.name_plural:
+            self.name_plural = f'{self.name}s\es'

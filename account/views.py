@@ -21,7 +21,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ('update', 'partial_update'):
             return [IsAccountOwner()]
-        elif self.action == 'destroy':
+        elif self.action in ('retrieve', 'destroy'):
             return [IsAccountOwnerOrAdmin()]
         return [AllowAny()]
 
@@ -31,8 +31,8 @@ class UserViewSet(viewsets.ModelViewSet):
         elif self.action == 'list':
             return UserListSerializer
         elif self.action in ('update', 'partial_update', 'retrieve'):
-            # return UserProfileSerializer
-            return UserSerializer
+            return UserProfileSerializer
+            # return UserSerializer
         return UserSerializer
 
     def create(self, request, *args, **kwargs):

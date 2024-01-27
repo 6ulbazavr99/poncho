@@ -74,11 +74,11 @@ Table Order {
   items id [ref: <> OrderItem.id]
   amount int [note: 'self.items.price']
   status choice
-  expectation datetime
   owner id [ref: > Account.id]
   created_at datetime
   updated_at datetime
 
+  // expectation datetime
   // address geo
 }
 
@@ -86,7 +86,8 @@ Table OrderItem {
   app order
   id int
   product id [ref: - Product.id]
-  count int
+  quantity int
+  amount int [note: 'self.product.prices']
 }
 
 Table Feedback {

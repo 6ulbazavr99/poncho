@@ -43,11 +43,11 @@ class ProductSerializer(serializers.ModelSerializer):
 class ProductListSerializer(ProductSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'title', 'description', 'price', 'preview', 'category', 'vendor')
+        fields = ('id', 'name', 'description', 'price', 'preview', 'category', 'vendor')
 
 
 class ProductProfileSerializer(ProductSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'title', 'description', 'price', 'preview', 'category', 'vendor', 'owner',
+        fields = ('id', 'name', 'description', 'price', 'preview', 'category', 'vendor', 'owner',
                   'discount', 'bulk_discount', 'specifications', 'status')

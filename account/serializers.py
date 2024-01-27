@@ -42,13 +42,13 @@ class UserSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(UserSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'avatar', 'birthdate', 'products', 'vendors')
+        fields = ('id', 'nickname', 'email', 'first_name', 'last_name', 'avatar', 'birthdate', 'products', 'vendors')
 
 
 class UserListSerializer(UserSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'avatar')
+        fields = ('id', 'nickname', 'avatar')
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):

@@ -8,3 +8,4 @@ python-decouple
 django-filter
 
 django-ckeditor
+django-rest-passwordreset

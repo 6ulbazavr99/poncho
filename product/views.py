@@ -39,8 +39,8 @@ class ProductViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'list':
             return ProductListSerializer
-        elif self.action in ('retrieve', 'partial_update', 'update'):
-            return ProductProfileSerializer
+        # elif self.action in ('retrieve', 'partial_update', 'update'):
+        #     return ProductProfileSerializer
         return ProductSerializer
 
     def create(self, request, *args, **kwargs):
