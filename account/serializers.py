@@ -78,6 +78,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 class VendorSerializer(serializers.ModelSerializer):
     products = serializers.SerializerMethodField()
     categories = serializers.SerializerMethodField()
+    members = UserListSerializer(many=True, read_only=True)
+    head = UserListSerializer(read_only=True)
 
     class Meta:
         model = Vendor

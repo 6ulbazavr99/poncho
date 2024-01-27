@@ -31,7 +31,7 @@ vendor: start +
 vendor: 80% +
 customuser: 80% +
 signals: celery ?
-vendor&user: fix sers&perms
+vendor&user: fix sers&perms +
 #
 ### product:
 category: model, serializers, views, admin, urls +
@@ -40,7 +40,7 @@ category: fix unique preview
 product: start +
 product: 70% +
 product: sers
-category: products list GET ID
+category: products list GET ID +
 category: add listing ser +
 #
 ### config:

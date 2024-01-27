@@ -12,6 +12,7 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(_('Фамилия'), max_length=255, null=True, blank=True)
     birthdate = models.DateField(_('Дата рождения'), null=True, blank=True)
     avatar = models.ImageField(_('Аватар'), upload_to='avatars', blank=True, null=True)
+    nickname = models.CharField(_('Псевдоним'), max_length=255, null=True, blank=True, unique=True)
 
     # phone =
 
@@ -29,10 +30,9 @@ class Vendor(models.Model):
     specifications = RichTextField(_('Характеристики'), blank=True, null=True)
     members = models.ManyToManyField(CustomUser, related_name='vendors_members', blank=True, verbose_name=_('Участники'))
     head = models.ForeignKey(CustomUser, related_name='vendors_head', blank=True, null=True, on_delete=models.SET_NULL, verbose_name=_('Руководитель'))
-
+    email = models.EmailField(_('Электронная почта'), unique=True, blank=True, null=True)
 
     # phone =
-    # email =
     # address =
 
     created_at = models.DateTimeField(_('Дата создания'), auto_now_add=True)
