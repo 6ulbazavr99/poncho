@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import AbstractUser
 from django.db import models
@@ -19,8 +21,26 @@ class CustomUser(AbstractUser):
     created_at = models.DateTimeField(_('Дата создания'), auto_now_add=True)
     updated_at = models.DateTimeField(_('Дата обновления'), auto_now=True)
 
+    is_active = models.BooleanField(
+        _("active"),
+        default=False,  # "False" for confirmation by email
+        help_text=_(
+            "Указывает, следует ли считать этого пользователя активным."
+            "Снимите этот флажок вместо удаления учетных записей"
+        ),
+    )
+    activation_code = models.CharField(max_length=255, default=_('waiting for confirmation'), null=True, blank=True)
+
     def __str__(self):
         return f'{self.username}'
+
+    def save(self, *args, **kwargs):
+        self.create_activation_code()
+        super().save(*args, **kwargs)
+
+    def create_activation_code(self):
+        code = str(uuid4())
+        self.activation_code = code
 
 
 class Vendor(models.Model):
