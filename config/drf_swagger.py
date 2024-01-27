@@ -33,7 +33,9 @@ customuser: 80% +
 signals: celery ?
 vendor&user: fix sers&perms +
 user: reg email confirmation + 
-user: utils: change host
+user/utils: change host !!!
+user: 80% +
+vendor: 80% +
 #
 ### product:
 category: model, serializers, views, admin, urls +
@@ -41,16 +43,20 @@ category: slug, mptt ?
 category: fix unique preview -
 product: start +
 product: 70% +
-product: sers 
+product: sers +
 category: products list GET ID +
 category: add listing ser +
+category: 80% +
+product: 80% +
 #
 ### config:
 settings: fix jwt +
+settings: emailback +
 #
 ### general:
 formatting the code +
 emailback +
+
 #
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -9,6 +9,7 @@ Table Account {
   avatar img
   created_at datetime
   updated_at datetime
+  nickname varchar
 
   // phone phone
 }
@@ -24,9 +25,9 @@ Table Vendor {
   head id [note: 'self.members.id']
   created_at datetime
   updated_at datetime
+  email email
 
   // phone phone
-  // email email
   // address geo
 }
 
@@ -44,6 +45,7 @@ Table Product {
   title varchar
   price int
   discount int
+  bulk_discount int
   owner id [ref: > Vendor.id]
   description text
   specifications richtext

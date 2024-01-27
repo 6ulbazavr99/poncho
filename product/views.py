@@ -7,6 +7,7 @@ from account.models import Vendor
 from product import serializers
 from product.models import Category, Product
 from product.permissions import IsOwnerOrHead, IsOwner
+from product.serializers import ProductListSerializer, ProductProfileSerializer, ProductSerializer
 
 
 class CategoryViewSet(ModelViewSet):
@@ -25,7 +26,6 @@ class CategoryViewSet(ModelViewSet):
 
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
-    serializer_class = serializers.ProductSerializer
 
     def get_permissions(self):
         if self.action in ('update', 'partial_update'):
@@ -35,6 +35,13 @@ class ProductViewSet(ModelViewSet):
         elif self.action == 'destroy':
             return [IsOwnerOrHead()]
         return [AllowAny()]
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return ProductListSerializer
+        elif self.action in ('retrieve', 'partial_update', 'update'):
+            return ProductProfileSerializer
+        return ProductSerializer
 
     def create(self, request, *args, **kwargs):
         vendor_id = request.data.get('vendor')

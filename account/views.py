@@ -31,7 +31,8 @@ class UserViewSet(viewsets.ModelViewSet):
         elif self.action == 'list':
             return UserListSerializer
         elif self.action in ('update', 'partial_update', 'retrieve'):
-            return UserProfileSerializer
+            # return UserProfileSerializer
+            return UserSerializer
         return UserSerializer
 
     def create(self, request, *args, **kwargs):

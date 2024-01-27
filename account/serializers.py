@@ -54,18 +54,18 @@ class UserListSerializer(UserSerializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(min_length=8, max_length=32,
                                      required=True, write_only=True)
-    password2 = serializers.CharField(min_length=8, max_length=32,
+    password_confirmation = serializers.CharField(min_length=8, max_length=32,
                                       required=True, write_only=True)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'password2',
+        fields = ('username', 'email', 'password', 'password_confirmation',
                   'first_name', 'last_name', 'avatar', 'birthdate')
 
     def validate(self, attrs):
         password = attrs['password']
-        password2 = attrs.pop('password2')
-        if password2 != password:
+        password_confirmation = attrs.pop('password_confirmation')
+        if password_confirmation != password:
             raise serializers.ValidationError(_('Пароли не совпадают'))
         validate_password(password)
         return attrs

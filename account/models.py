@@ -35,6 +35,8 @@ class CustomUser(AbstractUser):
         return f'{self.username}'
 
     def save(self, *args, **kwargs):
+        if not self.nickname:
+            self.nickname = self.get_username()
         self.create_activation_code()
         super().save(*args, **kwargs)
 
@@ -60,3 +62,7 @@ class Vendor(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _('Продавец')
+        verbose_name_plural = _('Продавцы')

@@ -16,6 +16,10 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = _('Категория')
+        verbose_name_plural = _('Категории')
+
 
 class Product(models.Model):
     STATUS_CHOICES = (
@@ -23,13 +27,23 @@ class Product(models.Model):
         ('out_of_stock', _('Нет в наличии'))
     )
 
-    title = models.CharField(max_length=255, unique=True)
-    description = models.TextField(blank=True, null=True)
-    specifications = RichTextField(blank=True, null=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    preview = models.ImageField(upload_to='previews', blank=True, null=True)
-    discount = models.PositiveSmallIntegerField(default=0)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='in_stock')
-    category = models.ManyToManyField(Category, blank=True, related_name='products')
-    owner = models.ForeignKey(User, related_name='products', on_delete=models.CASCADE, blank=True, null=True)
-    vendor = models.ForeignKey(Vendor, related_name='products', null=True, on_delete=models.SET_NULL)
+    title = models.CharField(max_length=255, unique=True, verbose_name=_('Название'))
+    description = models.TextField(blank=True, null=True, verbose_name=_('Описание'))
+    specifications = RichTextField(blank=True, null=True, verbose_name=_('Характеристики'))
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Цена'))
+    preview = models.ImageField(upload_to='previews', blank=True, null=True, verbose_name=_('Превью'))
+    discount = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Скидка'))
+    bulk_discount = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Массовая скидка'))
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='in_stock', blank=True, null=True, verbose_name=_('Статус'))
+    category = models.ManyToManyField(Category, blank=True, related_name='products', verbose_name=_('Категория'))
+    owner = models.ForeignKey(User, related_name='products', on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('Владелец'))
+    vendor = models.ForeignKey(Vendor, related_name='products', on_delete=models.CASCADE, verbose_name=_('Производитель'))
+
+    # address =
+
+    def __str__(self):
+        return f'{self.title} [{self.vendor}]'
+
+    class Meta:
+        verbose_name = _('Продукт')
+        verbose_name_plural = _('Продукты')

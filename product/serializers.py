@@ -22,7 +22,32 @@ class CategoryListSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    vendor = serializers.SerializerMethodField()
+    owner = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = '__all__'
+
+    def get_vendor(self, obj):
+        from account.serializers import VendorListSerializer
+        serializer = VendorListSerializer(obj.vendor, read_only=True)
+        return serializer.data
+
+    def get_owner(self, obj):
+        from account.serializers import UserListSerializer
+        serializer = UserListSerializer(obj.owner, read_only=True)
+        return serializer.data
+
+
+class ProductListSerializer(ProductSerializer):
+    class Meta:
+        model = Product
+        fields = ('id', 'title', 'description', 'price', 'preview', 'category', 'vendor')
+
+
+class ProductProfileSerializer(ProductSerializer):
+    class Meta:
+        model = Product
+        fields = ('id', 'title', 'description', 'price', 'preview', 'category', 'vendor', 'owner',
+                  'discount', 'bulk_discount', 'specifications', 'status')
