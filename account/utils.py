@@ -9,7 +9,7 @@ HOST = 'localhost:8000'     # change after deploy
 
 def send_confirmation_email(user, code):
     subject = 'Активация аккаунта в Poncho!'
-    activation_link = f'http://{HOST}/api/v1/account/activate/{code}/'
+    activation_link = f'http://{HOST}/api/v1/account/authorization/activate/{code}/'
 
     html_message = f"""
         <html>

@@ -10,6 +10,8 @@ schema_view = get_schema_view(
       default_version='v1',   # TODO:
       description="""
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 admin:
 Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNTU5NzQ1LCJpYXQiOjE3MDYzNjQ1NDUsImp0aSI6IjI1NjNjMDJjM2Y4ODQ5Yjg5M2E2ZWM3YWQwNDE4OTBjIiwidXNlcl9pZCI6MX0.hPxZt5bLmHeKX8ooWjQY938Cq_nOcd6EK9E8l_Wgwu8
 
@@ -22,7 +24,7 @@ Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwI
 oleg:
 Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNTU5Nzk2LCJpYXQiOjE3MDYzNjQ1OTYsImp0aSI6IjgwZGFmY2VkOGI1NTRkZWJhZGY3MTc4NTg0NWEyZTlkIiwidXNlcl9pZCI6NH0.e34_i55m9OjL-gb1ELcBp9G7n2maYZM2IUnUKpG5BMI
             
-///////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #
 #
 #
@@ -70,6 +72,7 @@ orderitem:
 ############### <config:
 settings: fix jwt +
 settings: emailback +
+drf_swagger: new schema add +
 ############### :config>
 #
 #
@@ -82,21 +85,28 @@ db_diagram +
 #
 #
 #
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-Reg. temple:
-
-{
-  "username": "andrey",
-  "email": "user@example.com",
-  "password": "stringst",
-  "password2": "stringst"
-}
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#
+#
+#
+############### <registration:
+#
+{"username": "user",
+"email": "user@gmail.com",
+"password": "bastard123",
+"password_confirmation": "bastard123"}
+#
+############### :registration>
+#
+#
+#
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#
+#
+#
       """,
-      terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@snippets.local"),
-      license=openapi.License(name="BSD License"),
+      terms_of_service="https://github.com/bulka174/poncho",
+      license=openapi.License(name="↑ GitHub ↑"),
    ),
    public=True,
    permission_classes=(permissions.AllowAny,),

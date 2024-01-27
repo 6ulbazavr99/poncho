@@ -49,7 +49,7 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response({'message': 'Пользователь успешно зарегистрирован, и отправлено письмо для активации!',
                          'data': serializer.data}, status=201)
 
-    @action(['GET'], detail=False, url_path='activate/(?P<uuid>[0-9A-Fa-f-]+)')
+    @action(['GET'], detail=False, url_path='authorization/activate/(?P<uuid>[0-9A-Fa-f-]+)')
     def activate(self, request, uuid):
         try:
             user = User.objects.get(activation_code=uuid)
