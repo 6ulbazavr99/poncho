@@ -11,13 +11,16 @@ from product.permissions import IsOwnerOrHead, IsOwner
 
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
-    serializer_class = serializers.CategorySerializer
 
     def get_permissions(self):
         if self.action in ('retrieve', 'list'):
             return [AllowAny()]
-        else:
-            return [IsAdminUser()]
+        return [IsAdminUser()]
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return serializers.CategoryListSerializer
+        return serializers.CategorySerializer
 
 
 class ProductViewSet(ModelViewSet):

@@ -11,16 +11,16 @@ schema_view = get_schema_view(
       description="""
 
 admin:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwMzYzMzgyLCJpYXQiOjE3MDYxNjgxODIsImp0aSI6IjI3ZTVkYzQ5Y2NlZDRlZjFiMTVkYjJlY2NlNWE5MjIxIiwidXNlcl9pZCI6MX0.kNm7rh_n9TE_00hwUksicem-nVvX0XgUVdCi2jXiWxQ
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNTU5NzQ1LCJpYXQiOjE3MDYzNjQ1NDUsImp0aSI6IjI1NjNjMDJjM2Y4ODQ5Yjg5M2E2ZWM3YWQwNDE4OTBjIiwidXNlcl9pZCI6MX0.hPxZt5bLmHeKX8ooWjQY938Cq_nOcd6EK9E8l_Wgwu8
 
 andrey:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwMzYzMTAwLCJpYXQiOjE3MDYxNjc5MDAsImp0aSI6ImI3ZDQzZGFlNjhmZjQ0ZjFiZmJhYjYyZWNhZGNjZDBiIiwidXNlcl9pZCI6Mn0.GLy4e1iiEHTRmG0boyn2sCX0NKX4Ta-f6JU7R2L6gNs
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNTU5NzY0LCJpYXQiOjE3MDYzNjQ1NjQsImp0aSI6ImIyMGE2YTgwYzU2NzQxMDY4M2FiNDIxNjVhODBiMjI5IiwidXNlcl9pZCI6Mn0.eV0L4QHdXmiDeYG4p4H4Zhdt1MGqnSRCcCcpgk7M96o
 
 sanya:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwMzYzMTk0LCJpYXQiOjE3MDYxNjc5OTQsImp0aSI6ImNiZWYyODdjYTVmOTRhNDJhZTEzMTRkNWJkZjcwNTk5IiwidXNlcl9pZCI6M30.XXsoUKw6BqSeW0FR_-nNjuC4wkYYtq816O1CbXxa4V0
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNTU5NzgwLCJpYXQiOjE3MDYzNjQ1ODAsImp0aSI6IjQ3NWQ1NjA2NmJjNDRkM2FhMzlmNjU5OWQ5YTY2MWQ2IiwidXNlcl9pZCI6M30._F8Qq8yEa5E9Rq2SFyjFW4eh2Xy2D1dl-6jmXYMS_Ck
 
 oleg:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwMzYzMjEyLCJpYXQiOjE3MDYxNjgwMTIsImp0aSI6ImNmYzMzNGJhMWM0MDRkODc4NDRiOTM0NGI4MjZkZjcwIiwidXNlcl9pZCI6NH0.XBGTYQwMPA8xJ_gZkqL6_SM4o4AAQ6Xdfw6gEMHf1PQ
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNTU5Nzk2LCJpYXQiOjE3MDYzNjQ1OTYsImp0aSI6IjgwZGFmY2VkOGI1NTRkZWJhZGY3MTc4NTg0NWEyZTlkIiwidXNlcl9pZCI6NH0.e34_i55m9OjL-gb1ELcBp9G7n2maYZM2IUnUKpG5BMI
             
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 #
@@ -31,6 +31,7 @@ vendor: start +
 vendor: 80% +
 customuser: 80% +
 signals: celery ?
+vendor&user: fix sers&perms
 #
 ### product:
 category: model, serializers, views, admin, urls +
@@ -39,6 +40,8 @@ category: fix unique preview
 product: start +
 product: 70% +
 product: sers
+category: products list GET ID
+category: add listing ser +
 #
 ### config:
 settings: fix jwt +

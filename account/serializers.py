@@ -3,7 +3,7 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 from account.models import Vendor
-from product.models import Product
+from product.models import Product, Category
 from product.serializers import ProductSerializer, CategorySerializer
 
 from django.utils.translation import gettext_lazy as _
@@ -21,7 +21,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_products(self, obj):
-        user = self.context['request'].user
+        request = self.context.get('request')
+        user = request.parser_context['kwargs']['pk']
         products = Product.objects.filter(owner=user)
         serialized_data = ProductSerializer(products, many=True).data
         products_info = [{'id': product_data.get('id'), 'title': product_data.get('title')} for product_data in
@@ -29,7 +30,8 @@ class UserSerializer(serializers.ModelSerializer):
         return products_info
 
     def get_vendors(self, obj):
-        user = self.context['request'].user
+        request = self.context.get('request')
+        user = request.parser_context['kwargs']['pk']
         vendors = Vendor.objects.filter(members=user)
         serialized_data = VendorSerializer(vendors, many=True).data
         vendors_info = [{'id': vendor_data.get('id'), 'name': vendor_data.get('name')} for vendor_data in
@@ -46,7 +48,7 @@ class UserProfileSerializer(UserSerializer):
 class UserListSerializer(UserSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'avatar', 'vendors')
+        fields = ('id', 'username', 'avatar')
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -82,15 +84,17 @@ class VendorSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_products(self, obj):
-        products = Product.objects.filter(vendor=obj)
+        products = obj.products.all()
         serialized_data = ProductSerializer(products, many=True).data
-        products_info = [{'id': product_data.get('id'), 'title': product_data.get('title')} for product_data in
-                         serialized_data]
+        products_info = [
+            {'id': product_data.get('id'), 'title': product_data.get('title'), 'category': product_data.get('category')}
+            for product_data in serialized_data]
+
         return products_info
 
     def get_categories(self, obj):
         products = obj.products.all()
-        categories = [product_category.category for product_category in products]
+        categories = Category.objects.filter(products__in=products)
         categories_serialized_data = CategorySerializer(categories, many=True).data
         categories_info = [{'id': category_data.get('id'), 'name': category_data.get('name')} for category_data in
                            categories_serialized_data]
