@@ -78,8 +78,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 class VendorSerializer(serializers.ModelSerializer):
     products = serializers.SerializerMethodField()
     categories = serializers.SerializerMethodField()
-    members = UserListSerializer(many=True, read_only=True)
-    head = UserListSerializer(read_only=True)
+    # head = UserListSerializer(read_only=True) #?????
+    # members = UserListSerializer(many=True, read_only=True)     # {"members" : [{"id":2}, {"id":3}]}
 
     class Meta:
         model = Vendor
@@ -97,10 +97,25 @@ class VendorSerializer(serializers.ModelSerializer):
     def get_categories(self, obj):
         products = obj.products.all()
         categories = Category.objects.filter(products__in=products)
+        # print(categories)
         categories_serialized_data = CategorySerializer(categories, many=True).data
         categories_info = [{'id': category_data.get('id'), 'name': category_data.get('name')} for category_data in
                            categories_serialized_data]
         return categories_info
+
+    # def validate_head(self, head):
+    #     if head not in self.instance.members.all():
+    #         print('123')
+    #         self.instance.members.add(head)
+    #     # print(self)
+    #     print(self.instance.members.all())
+    #     return head
+
+    # def save(self, **kwargs):
+    #     head = self.validated_data.get('head', self.instance.head)
+    #     if head and head not in self.instance.members.all():
+    #         self.instance.members.add(head)
+    #     return super().save(**kwargs)
 
 
 class VendorListSerializer(VendorSerializer):

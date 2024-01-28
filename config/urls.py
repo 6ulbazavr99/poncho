@@ -21,6 +21,8 @@ urlpatterns = [
 
     path('api/v1/product/', include('product.urls')),
 
+    path('api/v1/order/', include('order.urls')),
+
 ]
 
 urlpatterns += router.urls  # vendor

@@ -23,7 +23,7 @@ class CustomUser(AbstractUser):
 
     is_active = models.BooleanField(
         _("active"),
-        default=False,  # "False" for confirmation by email
+        default=True,  # "False" for confirmation by email
         help_text=_(
             "Указывает, следует ли считать этого пользователя активным."
             "Снимите этот флажок вместо удаления учетных записей"

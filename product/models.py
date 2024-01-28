@@ -34,11 +34,14 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Цена'))
     preview = models.ImageField(upload_to='previews', blank=True, null=True, verbose_name=_('Превью'))
     discount = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Скидка'))
-    bulk_discount = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Массовая скидка'))
+    bulk_discount = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Оптовая скидка'))
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='in_stock', blank=True, null=True, verbose_name=_('Статус'))
     category = models.ManyToManyField(Category, blank=True, related_name='products', verbose_name=_('Категория'))
     owner = models.ForeignKey(User, related_name='products', on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('Владелец'))
     vendor = models.ForeignKey(Vendor, related_name='products', on_delete=models.CASCADE, verbose_name=_('Производитель'))
+
+    created_at = models.DateTimeField(_('Дата создания'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('Дата обновления'), auto_now=True)
 
     # address =
 
@@ -51,4 +54,5 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.name_plural:
-            self.name_plural = f'{self.name}s\es'
+            self.name_plural = f"{self.name}'s\es"
+        super().save(*args, **kwargs)

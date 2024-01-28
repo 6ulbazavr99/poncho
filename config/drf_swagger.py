@@ -12,17 +12,17 @@ schema_view = get_schema_view(
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-admin:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNTU5NzQ1LCJpYXQiOjE3MDYzNjQ1NDUsImp0aSI6IjI1NjNjMDJjM2Y4ODQ5Yjg5M2E2ZWM3YWQwNDE4OTBjIiwidXNlcl9pZCI6MX0.hPxZt5bLmHeKX8ooWjQY938Cq_nOcd6EK9E8l_Wgwu8
+admin[1:1]:
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNjY4NTk1LCJpYXQiOjE3MDY0NzMzOTUsImp0aSI6IjFjODg1ZGM2ODJjMTQ1Mjc5NWZjODBlYmU4OWEzOTUxIiwidXNlcl9pZCI6MX0.qPGGR7pVsrnFoOSPglDe_HZ87PdxZcaI3IfUgihoExc
 
-andrey:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNTU5NzY0LCJpYXQiOjE3MDYzNjQ1NjQsImp0aSI6ImIyMGE2YTgwYzU2NzQxMDY4M2FiNDIxNjVhODBiMjI5IiwidXNlcl9pZCI6Mn0.eV0L4QHdXmiDeYG4p4H4Zhdt1MGqnSRCcCcpgk7M96o
+andrey[2:bastard123]:
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNjY4NTY3LCJpYXQiOjE3MDY0NzMzNjcsImp0aSI6ImI1Yjc5OTY3NWYyNTRjYWRhZjQyYWJhNWRlMzIwNjYxIiwidXNlcl9pZCI6Mn0.01zlLAguGtrN7newNkEON1wDHisR5LZpxf_zEBBkncU
 
-sanya:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNTU5NzgwLCJpYXQiOjE3MDYzNjQ1ODAsImp0aSI6IjQ3NWQ1NjA2NmJjNDRkM2FhMzlmNjU5OWQ5YTY2MWQ2IiwidXNlcl9pZCI6M30._F8Qq8yEa5E9Rq2SFyjFW4eh2Xy2D1dl-6jmXYMS_Ck
+user1:
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNTk1ODg5LCJpYXQiOjE3MDY0MDA2ODksImp0aSI6IjQ5MThhMTNiNTU5ZDQyZTk5YjU4NTNmOGZmMGQyNzYzIiwidXNlcl9pZCI6M30.XRHBmX0kykecvJGw23CSbmpEwArkyE_b87qLZHYDQCI
 
-oleg:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNTU5Nzk2LCJpYXQiOjE3MDYzNjQ1OTYsImp0aSI6IjgwZGFmY2VkOGI1NTRkZWJhZGY3MTc4NTg0NWEyZTlkIiwidXNlcl9pZCI6NH0.e34_i55m9OjL-gb1ELcBp9G7n2maYZM2IUnUKpG5BMI
+user2:
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNTk1OTg3LCJpYXQiOjE3MDY0MDA3ODcsImp0aSI6ImM1MTFhM2NlZjg5MTRhN2ZiOGM5NmEzNTBkOThhZjRhIiwidXNlcl9pZCI6NH0.dYzIrQ6L--4v0Y3l6z0I_K_EvBB1oOPouEW32HjCf58
             
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #
@@ -42,6 +42,7 @@ user: 80% +
 vendor: 80% +
 user: reset password +
 user: is_active superuser fix +
+vendor: fix head adding to members !!!!!!
 ############### :account>
 #
 #
