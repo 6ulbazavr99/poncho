@@ -18,6 +18,9 @@ class OrderItem(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Стоимость'), blank=True,
                                  null=True, editable=False)
 
+    created_at = models.DateTimeField(_('Дата создания'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('Дата обновления'), auto_now=True)
+
     def save(self, *args, **kwargs):
         if self.amount is None:
             self.calculate_amount()
@@ -67,10 +70,10 @@ class Order(models.Model):
         self.number = 'order№' + code
 
     def calculate_total_amount(self):
-        print(self.order_items.all(), '!@#!@#!@#!@#@!#!@#!@#')
-        print(self.order_items)
-        print(self.items.all())
-        print(self)
+        # print(self.order_items.all(), '!@#!@#!@#!@#@!#!@#!@#')
+        # print(self.order_items)
+        # print(self.items.all())
+        # print(self)
         total_amount = sum(item.amount for item in self.order_items.all())
         self.total_amount = total_amount
 
