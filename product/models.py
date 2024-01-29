@@ -46,7 +46,7 @@ class Product(models.Model):
     # address =
 
     def __str__(self):
-        return f'{self.name} [{self.vendor}]'
+        return f'{self.name}'
 
     class Meta:
         verbose_name = _('Продукт')

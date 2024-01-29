@@ -1,16 +1,19 @@
-# from django.contrib.auth import get_user_model
-# from django.db.models.signals import post_save
+# from django.db.models.signals import pre_save
 # from django.dispatch import receiver
 #
-# from order.models import Order
+# from order.models import OrderItem, Order
+# from product.models import Product
 #
-# # User = get_user_model()
+#
+# @receiver(pre_save, sender=OrderItem)
+# def update_order_item_amount(sender, instance, **kwargs):
+#     instance.amount = instance.product.price * instance.quantity
+#     instance.save()
 #
 #
-# @receiver(post_save, sender=Order)
-# def calculate_total_amount(sender, instance, **kwargs):
-#     print(instance.order_items.all(), 'POPOPOPOPOP')
-#     print(instance.items.product.all())
-#     # if instance.is_superuser and not instance.is_active:
-#     #     instance.is_active = True
-#     #     instance.save()
+# @receiver(pre_save, sender=Product)
+# def update_order_item_amount_on_product_price_change(sender, instance, **kwargs):
+#     order_items = OrderItem.objects.filter(product=instance)
+#     for order_item in order_items:
+#         order_item.amount = order_item.product.price * order_item.quantity
+#         order_item.save()

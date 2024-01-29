@@ -2,7 +2,6 @@ from uuid import uuid4
 
 from django.contrib.auth import get_user_model
 from django.db import models
-
 from django.utils.translation import gettext_lazy as _
 
 from product.models import Product
@@ -21,21 +20,22 @@ class OrderItem(models.Model):
     created_at = models.DateTimeField(_('Дата создания'), auto_now_add=True)
     updated_at = models.DateTimeField(_('Дата обновления'), auto_now=True)
 
-    def save(self, *args, **kwargs):
-        if self.amount is None:
-            self.calculate_amount()
-        super().save(*args, **kwargs)
-
     def calculate_amount(self):
         amount = self.product.price * self.quantity
         self.amount = amount
+        self.order.total_amount = self.order.total_amount + amount
+        self.order.save()
 
     class Meta:
         verbose_name = _('Элемент заказа')
         verbose_name_plural = _('Элементы заказа')
 
+    def save(self, *args, **kwargs):
+        self.calculate_amount()
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return f'[{self.product.name}] {self.quantity} шт. -> {self.order}'
+        return f'{self.order.number} [{self.order.owner}] --> {self.product} {self.quantity} шт.'
 
 
 class Order(models.Model):
@@ -50,32 +50,23 @@ class Order(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='open',
                               blank=True, null=True, verbose_name=_('Статус'))
-    items = models.ManyToManyField(Product, through=OrderItem, related_name='orders')
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Стоимость'), blank=True,
-                                 null=True, editable=False)
+                                 null=True, editable=False, default=0)
 
     created_at = models.DateTimeField(_('Дата создания'), auto_now_add=True)
     updated_at = models.DateTimeField(_('Дата обновления'), auto_now=True)
 
     def __str__(self):
-        return f'{self.number} [{str(self.owner)}]'
+        return f'{self.number} [{str(self.owner)}] --> {self.total_amount} [{self.status}]'
 
     def save(self, *args, **kwargs):
         self.generate_number()
         super().save(*args, **kwargs)
-        self.calculate_total_amount()
 
     def generate_number(self):
-        code = str(uuid4())[:8]
-        self.number = 'order№' + code
-
-    def calculate_total_amount(self):
-        # print(self.order_items.all(), '!@#!@#!@#!@#@!#!@#!@#')
-        # print(self.order_items)
-        # print(self.items.all())
-        # print(self)
-        total_amount = sum(item.amount for item in self.order_items.all())
-        self.total_amount = total_amount
+        if self.number == None:
+            code = str(uuid4())[:8]
+            self.number = 'order№' + code
 
     class Meta:
         verbose_name = _('Заказ')
