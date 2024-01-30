@@ -17,25 +17,19 @@ class OrderItem(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Стоимость'), blank=True,
                                  null=True, editable=False)
 
-    created_at = models.DateTimeField(_('Дата создания'), auto_now_add=True)
-    updated_at = models.DateTimeField(_('Дата обновления'), auto_now=True)
-
     def calculate_amount(self):
-        amount = self.product.price * self.quantity
-        self.amount = amount
-        self.order.total_amount = self.order.total_amount + amount
-        self.order.save()
+        self.amount = self.product.price * self.quantity
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.calculate_amount()
+
+    def __str__(self):
+        return f'{self.order.number} [{self.order.owner}] --> {self.product} {self.quantity} шт.'
 
     class Meta:
         verbose_name = _('Элемент заказа')
         verbose_name_plural = _('Элементы заказа')
-
-    def save(self, *args, **kwargs):
-        self.calculate_amount()
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f'{self.order.number} [{self.order.owner}] --> {self.product} {self.quantity} шт.'
 
 
 class Order(models.Model):
@@ -53,8 +47,18 @@ class Order(models.Model):
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Стоимость'), blank=True,
                                  null=True, editable=False, default=0)
 
+    items = models.ManyToManyField(Product, through='OrderItem', related_name='orders')
+
     created_at = models.DateTimeField(_('Дата создания'), auto_now_add=True)
     updated_at = models.DateTimeField(_('Дата обновления'), auto_now=True)
+
+    def calculate_amount(self):
+        self.total_amount = sum(item.amount for item in self.order_items.all())
+
+    def generate_number(self):
+        if self.number is None:
+            code = str(uuid4())[:8]
+            self.number = 'order№' + code
 
     def __str__(self):
         return f'{self.number} [{str(self.owner)}] --> {self.total_amount} [{self.status}]'
@@ -62,11 +66,7 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         self.generate_number()
         super().save(*args, **kwargs)
-
-    def generate_number(self):
-        if self.number == None:
-            code = str(uuid4())[:8]
-            self.number = 'order№' + code
+        self.calculate_amount()
 
     class Meta:
         verbose_name = _('Заказ')

@@ -1,17 +1,17 @@
 from django.contrib import admin
-from order.models import Order, OrderItem
+from .models import Order, OrderItem
 
 
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    extra = 1
+
+
+@admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    readonly_fields = ('total_amount', )
+    inlines = [OrderItemInline]
 
 
+@admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
-    readonly_fields = ('amount', )
-#
-#
-admin.site.register(Order, OrderAdmin)
-admin.site.register(OrderItem, OrderItemAdmin)
-
-# admin.site.register(Order)
-# admin.site.register(OrderItem)
+    pass

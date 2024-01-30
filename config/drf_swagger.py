@@ -64,8 +64,8 @@ product: vendor require
 #
 #
 ############### <order:
-order:
-orderitem:
+order: fix amount
+orderitem: fix amount
 ############### :order>
 #
 #
@@ -82,6 +82,7 @@ drf_swagger: new schema add +
 formatting the code +
 emailback +
 db_diagram +
+db_duagram: fix 
 ############### :general>
 #
 #

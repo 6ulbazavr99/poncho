@@ -71,8 +71,8 @@ Table Order {
   app order
   id int
   number varchar
-  items id [ref: <> OrderItem.id]
-  amount int [note: 'self.items.price']
+  items id [ref: <> Product.id, note: 'through = OrderItem']
+  total_amount int [note: 'self.items.price']
   status choice
   owner id [ref: > Account.id]
   created_at datetime
@@ -85,9 +85,10 @@ Table Order {
 Table OrderItem {
   app order
   id int
+  order id [ref: - Order.id]
   product id [ref: - Product.id]
   quantity int
-  amount int [note: 'self.product.prices']
+  amount decimal [note: 'self.product.prices']
 }
 
 Table Feedback {
