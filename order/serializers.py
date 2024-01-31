@@ -12,7 +12,6 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
     def get_amount(self, obj):
         amount = obj.product.price * obj.quantity
-        print(f"Debug: Amount for OrderItem {obj.id}: {amount}")
         return amount
 
 

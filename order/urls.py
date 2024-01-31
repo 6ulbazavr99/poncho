@@ -1,10 +1,10 @@
 from rest_framework import routers
 
-from .views import OrderViewSet, OrderItemViewSet
+from .views import OrderViewSet
 
 router = routers.DefaultRouter()
 router.register(r'', OrderViewSet)
-# router.register(r'item', OrderItemViewSet)
+
 
 urlpatterns = [
 ]

@@ -59,13 +59,16 @@ category: add listing ser +
 category: 80% +
 product: 80% +
 product: vendor require
+category: add pre-category
 ############### :product>
 #
 #
 #
 ############### <order:
-order: fix amount
-orderitem: fix amount
+order: fix amount +
+orderitem: fix amount +
+order: rest +
+orderitem: rest +
 ############### :order>
 #
 #
@@ -82,8 +85,15 @@ drf_swagger: new schema add +
 formatting the code +
 emailback +
 db_diagram +
-db_duagram: fix 
+db_diagram: fix + 
+readme: change postman link
 ############### :general>
+#
+#
+#
+############### <swagger:
+order-post: propKeyitemserrorindex0errorValue must be an integer 
+############### :swagger>
 #
 #
 #
