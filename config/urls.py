@@ -5,6 +5,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 from account.views import VendorViewSet
+from order.views import OrderItemViewSet
 from product.views import CategoryViewSet
 from .drf_swagger import urlpatterns as doc_urls
 
@@ -12,6 +13,8 @@ from .drf_swagger import urlpatterns as doc_urls
 router = routers.DefaultRouter()
 router.register(r'api/v1/vendor', VendorViewSet)
 router.register(r'api/v1/category', CategoryViewSet)
+router.register(r'api/v1/item', OrderItemViewSet)
+
 
 
 urlpatterns = [
