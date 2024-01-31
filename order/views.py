@@ -15,10 +15,10 @@ class OrderViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         order = serializer.save()
         items = self.request.data.get('items', [])
-
         for item in items:
+            quantity = item.get('quantity', 1)
             OrderItem.objects.create(
                 order=order,
                 product_id=item['product'],
-                quantity=item['quantity']
+                quantity=quantity
             )
