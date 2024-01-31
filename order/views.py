@@ -1,8 +1,6 @@
-from django.shortcuts import render
 from rest_framework import viewsets
-
-from order.models import Order, OrderItem
-from order.serializers import OrderSerializer, OrderItemSerializer, OrderListSerializer
+from .models import Order, OrderItem
+from .serializers import OrderSerializer, OrderItemSerializer
 
 
 class OrderItemViewSet(viewsets.ModelViewSet):
@@ -12,15 +10,15 @@ class OrderItemViewSet(viewsets.ModelViewSet):
 
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
-    def get_serializer_class(self):
-        if self.action == 'list':
-            return OrderListSerializer
-        return OrderSerializer
+    def perform_create(self, serializer):
+        order = serializer.save()
+        items = self.request.data.get('items', [])
 
-    # def perform_create(self, serializer):
-    #     serializer.save()
-
-#123
-
-#SAMFLKASNFLKSAFKLASNFL
+        for item in items:
+            OrderItem.objects.create(
+                order=order,
+                product_id=item['product'],
+                quantity=item['quantity']
+            )

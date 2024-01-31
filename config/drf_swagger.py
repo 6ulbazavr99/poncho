@@ -13,7 +13,7 @@ schema_view = get_schema_view(
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 +admin[1:1]:
-Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwODk0MjE3LCJpYXQiOjE3MDY2OTkwMTcsImp0aSI6ImYwNGU0ZmE4NDA4YTQ4M2NiZmVhM2NiMjhkNzZkYzI3IiwidXNlcl9pZCI6MX0.mzi9moO3jZR41Jwh4Svq2Yf1dxqYIBVZcs4CYA_rBHw
+Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwOTMyNzA4LCJpYXQiOjE3MDY3Mzc1MDgsImp0aSI6IjJmNzExNjU1Y2JhMzRkYjJhMjNhNTdkNjk3NTAyMDBhIiwidXNlcl9pZCI6MX0.bzbQ6vOO-YZrPjQn-THekvJvqbDI6b-kF_wpv0wlCeg
 
 andrey[2:bastard123]:
 Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMzEwNjY4NTY3LCJpYXQiOjE3MDY0NzMzNjcsImp0aSI6ImI1Yjc5OTY3NWYyNTRjYWRhZjQyYWJhNWRlMzIwNjYxIiwidXNlcl9pZCI6Mn0.01zlLAguGtrN7newNkEON1wDHisR5LZpxf_zEBBkncU

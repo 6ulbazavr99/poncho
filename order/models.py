@@ -10,26 +10,26 @@ from product.models import Product
 User = get_user_model()
 
 
-class OrderItem(models.Model):
-    order = models.ForeignKey('Order', related_name='order_items', on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE)
-    quantity = models.PositiveSmallIntegerField(default=1)
-    amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Стоимость'), blank=True,
-                                 null=True, editable=False)
-
-    def calculate_amount(self):
-        self.amount = self.product.price * self.quantity
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        self.calculate_amount()
-
-    def __str__(self):
-        return f'{self.order.number} [{self.order.owner}] --> {self.product} {self.quantity} шт.'
-
-    class Meta:
-        verbose_name = _('Элемент заказа')
-        verbose_name_plural = _('Элементы заказа')
+# class OrderItem(models.Model):
+#     order = models.ForeignKey('Order', related_name='order_items', on_delete=models.CASCADE)
+#     product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE)
+#     quantity = models.PositiveSmallIntegerField(default=1)
+#     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Стоимость'), blank=True,
+#                                  null=True, editable=False)
+#
+#     def calculate_amount(self):
+#         self.amount = self.product.price * self.quantity
+#
+#     def save(self, *args, **kwargs):
+#         super().save(*args, **kwargs)
+#         self.calculate_amount()
+#
+#     def __str__(self):
+#         return f'{self.order.number} [{self.order.owner}] --> {self.product} {self.quantity} шт.'
+#
+#     class Meta:
+#         verbose_name = _('Элемент заказа')
+#         verbose_name_plural = _('Элементы заказа')
 
 
 class Order(models.Model):
@@ -71,3 +71,25 @@ class Order(models.Model):
     class Meta:
         verbose_name = _('Заказ')
         verbose_name_plural = _('Заказы')
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, related_name='order_items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE)
+    quantity = models.PositiveSmallIntegerField(default=1)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Стоимость'), blank=True,
+                                 null=True, editable=False)
+
+    def calculate_amount(self):
+        self.amount = self.product.price * self.quantity
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.calculate_amount()
+
+    def __str__(self):
+        return f'{self.order.number} [{self.order.owner}] --> {self.product} {self.quantity} шт.'
+
+    class Meta:
+        verbose_name = _('Элемент заказа')
+        verbose_name_plural = _('Элементы заказа')
